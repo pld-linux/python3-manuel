@@ -8,7 +8,7 @@ Summary:	Building tested documentation
 Summary(pl.UTF-8):	Budowanie przetestowanej dokumentacji
 Name:		python-manuel
 Version:	1.10.1
-Release:	3
+Release:	4
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/manuel/
