@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_without	doc	# Sphinx documentation
 %bcond_without	tests	# unit tests
 %bcond_without	python2 # CPython 2.x module
 %bcond_without	python3 # CPython 3.x module
@@ -7,13 +8,14 @@
 Summary:	Building tested documentation
 Summary(pl.UTF-8):	Budowanie przetestowanej dokumentacji
 Name:		python-manuel
-Version:	1.10.1
-Release:	4
+# keep 1.11.x here for python2 support
+Version:	1.11.2
+Release:	1
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/manuel/
 Source0:	https://files.pythonhosted.org/packages/source/m/manuel/manuel-%{version}.tar.gz
-# Source0-md5:	5f481f0644df718f6154728444f0eb7d
+# Source0-md5:	9bbbb65afd67a5e53d35a6bd0c2d2943
 URL:		https://pypi.org/project/manuel/
 %if %{with python2}
 BuildRequires:	python-modules >= 1:2.7
@@ -30,6 +32,11 @@ BuildRequires:	python3-setuptools
 BuildRequires:	python3-six
 BuildRequires:	python3-zope.testing
 %endif
+%endif
+%if %{with doc}
+BuildRequires:	python3-myst_parser
+BuildRequires:	python3-sphinx_copybutton
+BuildRequires:	sphinx-pdg-3
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
@@ -78,6 +85,10 @@ Dokumentacja API modułu Pythona manuel.
 %py3_build %{?with_tests:test}
 %endif
 
+%if %{with doc}
+sphinx-build-3 -b html -c sphinx src/manuel sphinx/_build/html
+%endif
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -108,4 +119,10 @@ rm -rf $RPM_BUILD_ROOT
 %doc CHANGES.rst COPYRIGHT.rst README.rst
 %{py3_sitescriptdir}/manuel
 %{py3_sitescriptdir}/manuel-%{version}-py*.egg-info
+%endif
+
+%if %{with doc}
+%files apidocs
+%defattr(644,root,root,755)
+%doc sphinx/_build/html/{_static,*.html,*.js}
 %endif
