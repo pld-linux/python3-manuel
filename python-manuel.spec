@@ -10,7 +10,7 @@ Summary(pl.UTF-8):	Budowanie przetestowanej dokumentacji
 Name:		python-manuel
 # keep 1.11.x here for python2 support
 Version:	1.11.2
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/manuel/
