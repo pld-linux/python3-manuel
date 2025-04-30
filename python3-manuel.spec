@@ -14,10 +14,9 @@ Group:		Libraries/Python
 Source0:	https://files.pythonhosted.org/packages/source/m/manuel/manuel-%{version}.tar.gz
 # Source0-md5:	42caa321f5244b6ec38da5b9bc440d94
 URL:		https://pypi.org/project/manuel/
-BuildRequires:	python3-modules >= 1:3.4
+BuildRequires:	python3-modules >= 1:3.7
 BuildRequires:	python3-setuptools
 %if %{with tests}
-BuildRequires:	python3-six
 BuildRequires:	python3-zope.testing
 %endif
 %if %{with doc}
@@ -27,7 +26,7 @@ BuildRequires:	sphinx-pdg-3
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.714
-Requires:	python3-modules >= 1:3.4
+Requires:	python3-modules >= 1:3.7
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
