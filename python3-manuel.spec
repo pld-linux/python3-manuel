@@ -13,6 +13,7 @@ Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/manuel/
 Source0:	https://files.pythonhosted.org/packages/source/m/manuel/manuel-%{version}.tar.gz
 # Source0-md5:	42caa321f5244b6ec38da5b9bc440d94
+Patch0:		manuel-escape.patch
 URL:		https://pypi.org/project/manuel/
 BuildRequires:	python3-modules >= 1:3.7
 BuildRequires:	python3-setuptools
@@ -49,9 +50,15 @@ Dokumentacja API modułu Pythona manuel.
 
 %prep
 %setup -q -n manuel-%{version}
+%patch -P0 -p1
 
 %build
-%py3_build %{?with_tests:test}
+%py3_build
+
+%if %{with tests}
+PYTHONPATH=$(pwd)/src \
+%{__python3} -c '__import__("manuel.tests").tests.test_suite()'
+%endif
 
 %if %{with doc}
 sphinx-build-3 -b html -c sphinx src/manuel sphinx/_build/html

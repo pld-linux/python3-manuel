@@ -1,0 +1,11 @@
+--- manuel-1.13.0/src/manuel/testcase.py.orig	2023-09-23 16:02:54.000000000 +0200
++++ manuel-1.13.0/src/manuel/testcase.py	2025-05-30 19:19:00.649950674 +0200
+@@ -6,7 +6,7 @@ import textwrap
+ 
+ punctuation = re.escape(string.punctuation)
+ SECTION_TITLE = re.compile(r'^.+$', re.MULTILINE)
+-SECTION_UNDERLINE = re.compile('^[' + punctuation + ']+\s*$', re.MULTILINE)
++SECTION_UNDERLINE = re.compile('^[' + punctuation + r']+\s*$', re.MULTILINE)
+ MARKER = re.compile(r'^.. test-case: (\S+)', re.MULTILINE)
+ 
+ 
